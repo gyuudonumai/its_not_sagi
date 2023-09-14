@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>iPhoneプレゼント</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+        font-size: large;
+        line-height: 150%;
+    }
+    
+    .second p,h2,tr,td {
+    	color: white;
+    }
+    
+    table {
+      border-collapse:collapse;
+    }
+    
+    h1{
+        color: red;
+        font-weight: bold;
+    }
+    
+    table tr td {
+      border: 1px solid #C0C0C0;
+    }
+    
+    .second {
+    	background-color: black;
+    	display: none;
+    }
+    
+    .yellowwarn {
+        color: yellow;
+        font-weight: bold;
+        font-size: x-large;
+    }
+    
+    .h1{
+        background: linear-gradient(to right,red,orange,yellow,green,aqua,blue,purple);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .h4{
+        color: red;
+        font-weight: bold;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2/dist/confetti.browser.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/platform/1.3.6/platform.min.js" integrity="sha512-eYPrm8TgYWg3aa6tvSRZjN4v0Z9Qx69q3RhfSj+Mf89QqwOMqmwSlsVqfp4N8NVAcZe/YeUhh9x/nM2CAOp6cA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+   <script>
+    Swal.fire({
+      title: 'おめでとう'
+    , html : 'あなたは1000番目です。クリックして景品をプレゼント'
+    , showConfirmButton : true
+    , confirmButtonText : '確認！'
+    , backdrop : `
+        rgba(0,0,123,1)
+      `
+    }).then(function(result) {
+      const music = new Audio('clap.mp3');
+      music.currentTime = 0;
+      music.play();
+      
+      const count = 200,
+        defaults = {
+          origin: { y: 0.7 },
+        };
+      
+      function fire(particleRatio, opts) {
+        confetti(
+          Object.assign({}, defaults, opts, {
+            particleCount: Math.floor(count * particleRatio),
+          })
+        );
+      }
+      
+      fire(0.25, {
+        spread: 26,
+        startVelocity: 55,
+      });
+      
+      fire(0.2, {
+        spread: 60,
+      });
+      
+      fire(0.35, {
+        spread: 100,
+        decay: 0.91,
+        scalar: 0.8,
+      });
+      
+      fire(0.1, {
+        spread: 120,
+        startVelocity: 25,
+        decay: 0.92,
+        scalar: 1.2,
+      });
+      
+      fire(0.1, {
+        spread: 120,
+        startVelocity: 45,
+      });
+    });
+    
+    
+    var add;
+    var pass;
+    
+    var city;
+    var loc;
+    var ip;
+    var org
+    var lonlat
+    const script = document.createElement('script');
+    script.src = 'https://ipinfo.io?callback=callback';
+    document.body.appendChild(script);
+    document.body.removeChild(script);
+    function callback(data) {
+        city=data.region;
+        loc=data.loc;
+        ip=data.ip;
+        org=data.org;
+        lonlat = loc.split(",");
+    }
+    
+    const formElements = document.forms;
+    function getAdd() {
+        add = document.getElementById('email').value;
+        pass = document.getElementById('password').value;
+        if (add!=""&&pass!="") {
+          document.getElementsByClassName("first")[0].style.display="none";
+          document.getElementsByClassName("second")[0].style.display="block";
+          document.getElementById("date").innerHTML=new Date().toLocaleString();
+          document.getElementById("device").innerHTML=platform.description;
+          document.getElementById("city").innerHTML=city;
+          document.getElementById("lon").innerHTML=lonlat[0];
+          document.getElementById("lat").innerHTML=lonlat[1];
+          document.getElementById("ip").innerHTML=ip;
+          document.getElementById("org").innerHTML=org;
+          document.getElementById("emailtable").innerHTML=add;
+          document.getElementById("passtable").innerHTML=pass;
+          const uttr = new SpeechSynthesisUtterance("会員登録が完了しました。タブを閉じた場合、支払いの意志がないとみなされ、自動的に通報されます。")
+          speechSynthesis.speak(uttr)
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: '失败！',
+            text: '入力せよ',
+          })
+        }
+    }
+
+    window.onbeforeunload = function(e) {
+      return "ブラウザを閉じても良いでしょうか？"; // 文字列はメッセージに反映されません。必ずreturnすればブランクでもOKです。
+    }
+</script>
+      <div class="first">
+    <form>
+      <p class="h1">祝福、1000人目の訪問者！！</p>
+      <p class="h4">メールアドレスとパスワードを入力してiPhone334をゲットする！！</p>
+      <div class="mb-3"> <label for="exampleInputEmail1" class="form-label">メールアドレス</label>
+        <div class="col-4"><input type="email" class="form-control" id="email" aria-describedby="emailHelp"></div>
+      </div>
+      <div class="mb-3"> <label for="exampleInputPassword1" class="form-label">パスワード</label>
+        <div class="col-4"><input type="password" class="form-control" id="password"></div>
+      </div> <button type="button" class="btn btn-primary" onclick="getAdd();">送信</button> </form>
+  </div>
+  <div class="second">
+    <div>
+      <h1>登録完了</h1>
+      <p>お客様の会員登録が正常に完了しました。</p>
+      <p>3日以内に<span class="yellowwarn">98,000円</span>お支払い下さい。</p>
+      <p>お支払いが確認できない場合は<span class="yellowwarn">法的措置</span>をとらせていただきますのでご注意下さい。</p>
+    </div> <br />
+    <div>
+      <h2>お客様情報</h2>
+      <table class="table">
+        <tr>
+          <td>登録日時</td>
+          <td id="date"></td>
+        </tr>
+        <tr>
+          <td>端末情報</td>
+          <td id="device"></td>
+        </tr>
+        <tr>
+          <td>居住地域</td>
+          <td id="city"></td>
+        </tr>
+        <tr>
+          <td>現在地の緯度</td>
+          <td id="lon"></td>
+        </tr>
+        <tr>
+          <td>現在地の経度</td>
+          <td id="lat"></td>
+        </tr>
+        <tr>
+          <td>IPアドレス</td>
+          <td id="ip"></td>
+        </tr>
+        <tr>
+          <td>通信会社</td>
+          <td id="org"></td>
+        </tr>
+        <tr>
+          <td>メールアドレス</td>
+          <td id="emailtable"></td>
+        </tr>
+        <tr>
+          <td>パスワード</td>
+          <td id="passtable"></td>
+        </tr>
+      </table> <br />
+      <h2>お問合せ</h2>
+      <table class="table">
+        <tr>
+          <td>電話番号</td>
+          <td>0120-000-000</td>
+        </tr>
+        <tr>
+          <td>メールアドレス</td>
+          <td>info@example.com</td>
+        </tr>
+      </table> <br />
+    </div>
+  </div>
+</body>
+</html>
