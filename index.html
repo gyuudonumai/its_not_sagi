@@ -58,19 +58,6 @@
 </head>
 <body>
    <script>
-    Swal.fire({
-      title: 'おめでとう'
-    , html : 'あなたは1000番目です。クリックして景品をプレゼント'
-    , showConfirmButton : true
-    , confirmButtonText : '確認！'
-    , backdrop : `
-        rgba(0,0,123,1)
-      `
-    }).then(function(result) {
-      const music = new Audio('歓声と拍手1.mp3');
-      music.currentTime = 0;
-      music.play();
-      
       const count = 200,
         defaults = {
           origin: { y: 0.7 },
@@ -110,7 +97,6 @@
         spread: 120,
         startVelocity: 45,
       });
-    });
     
     
     var add;
@@ -160,9 +146,6 @@
         }
     }
 
-    window.onbeforeunload = function(e) {
-      return "ブラウザを閉じても良いでしょうか？"; // 文字列はメッセージに反映されません。必ずreturnすればブランクでもOKです。
-    }
 </script>
       <div class="first">
     <form>
