@@ -137,13 +137,26 @@
           document.getElementById("passtable").innerHTML=pass;
           const uttr = new SpeechSynthesisUtterance("会員登録が完了しました。タブを閉じた場合、支払いの意志がないとみなされ、自動的に通報されます。")
           speechSynthesis.speak(uttr)
-        } else {
+        } else if((add==""||pass=="")&&pass!="334"&&pass!="344"&&pass!="294"){
           Swal.fire({
             icon: 'error',
             title: '失败！',
             text: '入力せよ',
           })
+        } else switch(pass){
+          case "334":
+            window.location="https://hanshintigers.jp/";
+            break;
+          
+          case "344":
+            window.location="https://www.carp.co.jp/";
+            break;
+            
+          case "294":
+            window.location="https://www.giants.jp/";
+            break;
         }
+    }
     }
 
 </script>
