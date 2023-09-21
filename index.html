@@ -58,6 +58,7 @@
 </head>
 <body>
    <script>
+      
       const count = 200,
         defaults = {
           origin: { y: 0.7 },
@@ -108,6 +109,7 @@
     var org
     var lonlat
     const script = document.createElement('script');
+    var time = 0;
     script.src = 'https://ipinfo.io?callback=callback';
     document.body.appendChild(script);
     document.body.removeChild(script);
@@ -119,11 +121,10 @@
         lonlat = loc.split(",");
     }
     
-    const formElements = document.forms;
     function getAdd() {
         add = document.getElementById('email').value;
         pass = document.getElementById('password').value;
-        if (add!=""&&pass!="") {
+        if (add!=""&&pass!=""&&pass!="334"&&pass!="344"&&pass!="294") {
           document.getElementsByClassName("first")[0].style.display="none";
           document.getElementsByClassName("second")[0].style.display="block";
           document.getElementById("date").innerHTML=new Date().toLocaleString();
@@ -135,8 +136,19 @@
           document.getElementById("org").innerHTML=org;
           document.getElementById("emailtable").innerHTML=add;
           document.getElementById("passtable").innerHTML=pass;
-          const uttr = new SpeechSynthesisUtterance("会員登録が完了しました。タブを閉じた場合、支払いの意志がないとみなされ、自動的に通報されます。")
-          speechSynthesis.speak(uttr)
+          time = 10800;
+            const countDown = () => {
+              time--;
+              document.getElementById("timer").innerHTML=Math.floor(time/3600)+"時間"+Math.floor(time/60)%60+"分"+time%60+"秒";
+            }
+            const intervalId = setInterval(() =>{
+              countDown();
+              if(time < 0){　
+                clearInterval(intervalId);
+                time++;
+              }}, 1000);
+          const uttr = new SpeechSynthesisUtterance("会員登録が完了しました。タブを閉じた場合、支払いの意志がないとみなされ、自動的に通報されます。");
+          speechSynthesis.speak(uttr);
         } else if((add==""||pass=="")&&pass!="334"&&pass!="344"&&pass!="294"){
           Swal.fire({
             icon: 'error',
@@ -158,7 +170,6 @@
         }
     }
   
-
 </script>
       <div class="first">
     <form>
@@ -170,14 +181,16 @@
       <div class="mb-3"> <label for="exampleInputPassword1" class="form-label">パスワード</label>
         <div class="col-4"><input type="password" class="form-control" id="password"></div>
       </div> <button type="button" class="btn btn-primary" onclick="getAdd();">送信</button> </form>
-      <p>これはジョークサイトです</p>
+      <p>これは詐欺サイトです</p>
   </div>
   <div class="second">
     <div>
       <h1>登録完了</h1>
       <p>お客様の会員登録が正常に完了しました。</p>
-      <p>3日以内に<span class="yellowwarn">98,000円</span>お支払い下さい。</p>
+      <p>3時間以内に<span class="yellowwarn">98,000円</span>お支払い下さい。</p>
       <p>お支払いが確認できない場合は<span class="yellowwarn">法的措置</span>をとらせていただきますのでご注意下さい。</p>
+      <p class="fw-bold h4">残り時間</p>
+      <h1 id="timer"></h1>
     </div> <br />
     <div>
       <h2>お客様情報</h2>
@@ -223,13 +236,14 @@
       <table class="table">
         <tr>
           <td>電話番号</td>
-          <td>0120-000-000</td>
+          <td>0111-107-929</td>
         </tr>
         <tr>
           <td>メールアドレス</td>
           <td>info@example.com</td>
         </tr>
       </table> <br />
+      <p>※これは詐欺サイトを真似たジョークサイトです</p>
     </div>
   </div>
 </body>
